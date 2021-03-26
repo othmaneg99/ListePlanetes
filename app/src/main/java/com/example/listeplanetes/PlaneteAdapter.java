@@ -1,6 +1,7 @@
 package com.example.listeplanetes;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,18 +67,20 @@ class PlaneteAdapter extends BaseAdapter {
             itemView = inflater.inflate(R.layout.listitem, null);
         }
         TextView nomPlanete = (TextView) itemView.findViewById(R.id.textView);
-        final CheckBox checkBox = (CheckBox) context.findViewById(R.id.checkbox);
-        final Spinner spinner = (Spinner) context.findViewById(R.id.spinner);
+        final CheckBox checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+        final Spinner spinner = (Spinner) itemView.findViewById(R.id.spinner);
         nomPlanete.setText(Data.planetes.get(position));
         verif.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                ListView listView = context.findViewById(R.id.listView);
                 List<String> selections = new ArrayList<String>();
-                for (int i = 0; i < spinner.getChildCount(); i++) {
+
+                for (int i = 0; i < listView.getChildCount(); i++) {
 
                     // Get row's spinner
-                    View listItem = spinner.getChildAt(i);
+                    View listItem = listView.getChildAt(i);
                     Spinner spinner = (Spinner) listItem.findViewById(R.id.spinner);
 
                     // Get selection
@@ -84,9 +88,11 @@ class PlaneteAdapter extends BaseAdapter {
                     selections.add(selection);
 
                 }   String reponse ="reponses justes :";
+
                 for (int j = 0; j < selections.size(); j++) {
                     String element = selections.get(j);
-                    if(element == Data.taillePlanetes[j]){
+
+                    if(element.equals(Data.taillePlanetes[j])  ){
 
                         reponse += Data.planetes.get(j)+" ";
 
