@@ -85,23 +85,25 @@ class PlaneteAdapter extends BaseAdapter {
 
                 }   String reponse ="reponses justes :";
                 for (int j = 0; j < selections.size(); j++) {
-                    /*String element = selections.get(j);
-                    if(element == Data.taillePlanetes[j]){*/
+                    String element = selections.get(j);
+                    if(element == Data.taillePlanetes[j]){
 
                         reponse += Data.planetes.get(j)+" ";
 
-                   // }
+                   }
 
 
                 }
-
                 Toast.makeText(context,reponse, Toast.LENGTH_SHORT).show();
 
 
 
 
 
+
+
                 }
+
 
         });
 
